@@ -8,8 +8,8 @@ class DataTestCases(unittest.TestCase):
                          'Aggies Do', 
                          'Aggie Strong!',
                          'Go Aggies',
-                         'And Thats on 1891']
-
+                         'And Thats on 1891',
+                         "Let's Go Aggies"]
         data = read_data('sample_data.txt')
 
         self.assertEqual(data, expected_data)
