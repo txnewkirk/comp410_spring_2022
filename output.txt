@@ -1,0 +1,16 @@
+(py39) boonet@REMC02W4DNGHTD6 comp410_spring_2022 % pytest --cov
+================================================================================== test session starts ===================================================================================
+platform darwin -- Python 3.9.7, pytest-6.2.5, py-1.10.0, pluggy-1.0.0
+rootdir: /Users/boonet/Documents/comp410_spring_2022
+plugins: cov-3.0.0
+collected 1 item                                                                                                                                                                         
+
+test_pii_data.py .                                                                                                                                                                 [100%]
+
+---------- coverage: platform darwin, python 3.9.7-final-0 -----------
+Name               Stmts   Miss  Cover
+--------------------------------------
+pii_data.py           10      2    80%
+test_pii_data.py       9      1    89%
+--------------------------------------
+TOTAL                 19      3    84%
