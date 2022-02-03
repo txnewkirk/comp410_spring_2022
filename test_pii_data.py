@@ -10,6 +10,7 @@ class DataTestCases(unittest.TestCase):
 
         data = read_data('sample_data.txt')
 
+
         self.assertEqual(data, expected_data)
 
 
