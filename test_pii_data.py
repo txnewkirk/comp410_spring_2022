@@ -6,9 +6,7 @@ class DataTestCases(unittest.TestCase):
     def test_read_data(self):
         expected_data = ['Aggie Pride Worldwide',
                          'Aggies Do',
-main
-                         'Go Aggies']
-
+                         'Go Aggies',
                          'Aggie Strong!',
                          'Go Aggies',
                          'And Thats on 1891',
@@ -26,11 +24,9 @@ main
                          'Aggie Pride',
                          'Leaders Can Aggies Do',
                          'Mens et Manus',
-                         'Aggies Aggies Aggies'
- main
+                         'Aggies Aggies Aggies']
 
         data = read_data('sample_data.txt')
-
 
         self.assertEqual(data, expected_data)
 
