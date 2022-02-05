@@ -8,7 +8,11 @@ class Pii(str):
     # https://regex101.com
     # https://www.w3schools.com/python/python_regex.asp
     def has_us_phone(self):
-        return None
+        # Match a US phone number ddd-ddd-dddd ie 123-456-7890
+        match = re.search(r'\d{3}-\d{3}-\d{4}', self)
+        if match:
+            return True
+        return False
 
     def has_email(self):
         return None
@@ -48,3 +52,12 @@ def read_data(filename: str):
 if __name__ == '__main__':
     data = read_data('sample_data.txt')
     print(data)
+    print('---')
+
+    pii_data = Pii('My phone number is 123-123-1234')
+    print(pii_data)
+
+    if pii_data.has_pii():
+        print('There is PII data preset')
+    else:
+        print('No PII data detected')
