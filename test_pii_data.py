@@ -26,12 +26,10 @@ class DataTestCases(unittest.TestCase):
                          'Mens et Manus',
                          'Aggies Aggies Aggies',
                          'Aggie Pride',
-                         'Because thats what Aggies do',
-                         'Aggie Bred',
                          'Aggies are always number 1!',
-                         'Because thats what Aggies do']
+                         'Because thats what Aggies do',
+                         'Aggie Bred']
                          
-
         data = read_data('sample_data.txt')
 
         self.assertEqual(data, expected_data)
