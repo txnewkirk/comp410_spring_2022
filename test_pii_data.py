@@ -5,7 +5,7 @@ from pii_data import read_data
 class DataTestCases(unittest.TestCase):
     def test_read_data(self):
         expected_data = ['Aggie Pride Worldwide',
-                         'Aggies Do']
+                         'Aggies Do', 'Move forward with purpose']
 
         data = read_data('sample_data.txt')
 
