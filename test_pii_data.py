@@ -34,7 +34,6 @@ class DataTestCases(unittest.TestCase):
                          'GO Aggie!',
                          'Aggie Pride]
 
-
         data = read_data('sample_data.txt')
 
         self.assertEqual(data, expected_data)
