@@ -29,7 +29,7 @@ class DataTestCases(unittest.TestCase):
                          'Aggie Pride',
                          'Aggies are always number 1!',
                          'Because thats what Aggies do',
-                         'Aggie Bred'
+                         'Aggie Bred',
                          'Move forward with purpose']
 
         data = read_data('sample_data.txt')
