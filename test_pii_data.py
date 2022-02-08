@@ -6,14 +6,13 @@ from pii_data import Pii
 class DataTestCases(unittest.TestCase):
     def test_read_data(self):
         expected_data = ['Aggie Pride Worldwide',
-                         'Aggies Do',
+                         'Aggies Do', 
                          'Go Aggies',
                          'Aggie Strong!',
                          'Go Aggies',
                          'And Thats on 1891',
                          "Let's Go Aggies",
                          'Never Ever Underestimate an Aggie',
-                         'Aggie Pride',
                          'Every Day The Aggie Way',
                          'Can I get an Aggie Pride',
                          'Aggies Do ^2',
@@ -30,7 +29,11 @@ class DataTestCases(unittest.TestCase):
                          'Aggie Pride',
                          'Aggies are always number 1!',
                          'Because thats what Aggies do',
-                         'Aggie Bred']
+                         'Aggie Bred',
+                         'Move forward with purpose',
+                         'GO Aggie!',
+                         'Aggie Pride]
+
 
         data = read_data('sample_data.txt')
 
