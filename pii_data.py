@@ -33,7 +33,7 @@ class Pii(str):
                           r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b$', self)
 
         # 255.255.255.255 is already preserved for broadcasting and would be valid
-        if self.__eq__('255.255.255.255'):
+        if self.__eq__('255.255.255.255') | self.__eq__('0.0.0.0'):
             return False
         elif match:
             return True

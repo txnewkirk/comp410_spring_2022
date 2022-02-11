@@ -58,34 +58,32 @@ class DataTestCases(unittest.TestCase):
         test_data = Pii('192.168.168.2')
         self.assertTrue(test_data.has_ipv4())
 
-        # Test an incomplete address
-        test_data = Pii('192.168')
-        self.assertFalse(test_data.has_ipv4())
-
         # Test a reserved address
-        test_data = Pii('255.255.255.255')
+        test_data = Pii('255.255.255.255')      # for broadcasting
+        self.assertFalse(test_data.has_ipv4())
+        test_data = Pii('0.0.0.0')              # for default route
         self.assertFalse(test_data.has_ipv4())
 
         # Test an out of range address
         test_data = Pii('192.168.168.256')
         self.assertFalse(test_data.has_ipv4())
 
-        # Test address with extra digits
-        test_data = Pii('192.168.168.1.2.5')
-        self.assertFalse(test_data.has_ipv4())
-
         # Test incorrect format
-        test_data = Pii('192..168.168.256')  # extra dot
+        test_data = Pii('192.168.168.1.2.5')    # Test address with extra digits
         self.assertFalse(test_data.has_ipv4())
-        test_data = Pii('.192.168.168.256')  # dot at beginning
+        test_data = Pii('192.168')              # incomplete address
         self.assertFalse(test_data.has_ipv4())
-        test_data = Pii('192.168.168.256.')  # dot at end
+        test_data = Pii('192..168.168.256')     # extra dot
         self.assertFalse(test_data.has_ipv4())
-        test_data = Pii('1f2.168.168.256')  # with 'f' in place of number
+        test_data = Pii('.192.168.168.256')     # dot at beginning
         self.assertFalse(test_data.has_ipv4())
-        test_data = Pii('192.168.168.$')  # with '$' in place of number
+        test_data = Pii('192.168.168.256.')     # dot at end
         self.assertFalse(test_data.has_ipv4())
-        test_data = Pii('192,168,168,$')  # with incorrect delimiters(,)
+        test_data = Pii('1f2.168.168.256')      # with 'f' in place of number
+        self.assertFalse(test_data.has_ipv4())
+        test_data = Pii('192.168.168.$')        # with '$' in place of number
+        self.assertFalse(test_data.has_ipv4())
+        test_data = Pii('192,168,168,$')        # with incorrect delimiters(,)
         self.assertFalse(test_data.has_ipv4())
 
     def test_has_ipv6(self):
