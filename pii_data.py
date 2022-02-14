@@ -18,10 +18,37 @@ class Pii(str):
         return None
 
     def has_ipv4(self):
-        return None
+        # Match an IPv4 address: num.num.num.num where num range = 0 - 255
+
+        # [0-9]:        match numbers 0 - 9
+        # [1-9][0-9]:   match numbers 10 - 99
+        # 1[0-9][0-9]:  match numbers 100 - 199
+        # 2[0-4][0-9]:  match numbers 200 - 249
+        # 25[0-5]:      match numbers 250 - 255
+
+        match = re.search(r''
+                          r'^\b([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b'
+                          r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b'
+                          r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b'
+                          r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b$', self)
+
+        # 255.255.255.255 is already preserved for broadcasting and would be valid
+        if self.__eq__('255.255.255.255') | self.__eq__('0.0.0.0'):
+            return False
+        elif match:
+            return True
+        return False
 
     def has_ipv6(self):
-        return None
+        match = re.search(r'\b^[0-9a-fA-F]{0,4}\b:\b[0-9a-fA-F]{0,4}\b:'
+                          r'\b[0-9a-fA-F]{0,4}\b:\b[0-9a-fA-F]{0,4}\b:'
+                          r'\b[0-9a-fA-F]{0,4}\b:\b[0-9a-fA-F]{0,4}\b:'
+                          r'\b[0-9a-fA-F]{0,4}\b:\b[0-9a-fA-F]{0,4}\b', self)
+        if self.__eq__('0:0:0:0:0:0:0:0'):
+            return False
+        elif match:
+            return True
+        return False
 
     def has_name(self):
         return None
