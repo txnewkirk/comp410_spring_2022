@@ -26,10 +26,12 @@ class Pii(str):
         # 2[0-4][0-9]:  match numbers 200 - 249
         # 25[0-5]:      match numbers 250 - 255
 
-        match = re.findall(r'^\b([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b'
+        match = re.search(r'^\b([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b'
                            r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b'
                            r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b'
                            r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b$', self)
+
+
 
         # 255.255.255.255 is already preserved for broadcasting and would be valid
         if self.__eq__('255.255.255.255') | self.__eq__('0.0.0.0'):
@@ -39,10 +41,10 @@ class Pii(str):
         return False
 
     def has_ipv6(self):
-        match = re.findall(r'^(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?:'
+        match = re.search(r'(^(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?:'
                            r'(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?:'
                            r'(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?:'
-                           r'(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?$', self)
+                           r'(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?$)', self)
         if self.__eq__('0:0:0:0:0:0:0:0') | self.__eq__(':::::::'):
             return False
         if match:
