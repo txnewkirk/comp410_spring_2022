@@ -15,7 +15,11 @@ class Pii(str):
         return False
 
     def has_email(self):
-        return None
+        # Match a user's email
+        validemail = re.search(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', self)
+        if validemail:
+            return True
+        return False
 
     def has_ipv4(self):
         # Match an IPv4 address: num.num.num.num where num range = 0 - 255
