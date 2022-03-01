@@ -143,6 +143,21 @@ class DataTestCases(unittest.TestCase):
         test_data = Pii()
         self.assertEqual(test_data.has_at_handle(), None)
 
+    def test_has_ssn(self):
+        test_data = Pii('123-45-6789')
+        self.assertTrue(test_data.has_ssn())
+        test_data = Pii('987-65-4321')
+        self.assertTrue(test_data.has_ssn())
+
+        test_data = Pii('123.45.6789')
+        self.assertFalse(test_data.has_ssn())
+        test_data = Pii('123456789')
+        self.assertFalse(test_data.has_ssn())
+        test_data = Pii('123,45,6789')
+        self.assertFalse(test_data.has_ssn())
+
+
+
     def test_has_pii(self):
         test_data = Pii()
         self.assertEqual(test_data.has_pii(), None)
