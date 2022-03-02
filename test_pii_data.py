@@ -136,8 +136,25 @@ class DataTestCases(unittest.TestCase):
         self.assertEqual(test_data.has_street_address(), None)
 
     def test_has_credit_card(self):
-        test_data = Pii()
-        self.assertEqual(test_data.has_credit_card(), None)
+        #Test case for a valid credit card
+        test_data = Pii('My credit card number is 1234-5678-1234-5678')
+        self.assertEqual(test_data.has_credit_card(), True)
+
+        #Test case for a invalid credit card with letter
+        test_data = Pii('My credit card number is 12k4-5678-1234-5678')
+        self.assertEqual(test_data.has_credit_card(), False)
+
+        #Test case for a invalid credit card with incorrect delimiters
+        test_data = Pii('My credit card number is 1234.5678.1234.5678')
+        self.assertEqual(test_data.has_credit_card(), False)
+
+        #Test case for a invalid credit card with less numbers
+        test_data = Pii('My credit card number is 1234-5678-1234-678')
+        self.assertEqual(test_data.has_credit_card(), False)
+
+        #Test case for a invalid credit card with too many numbers
+        test_data = Pii('My credit card number is 1234-56789-23456-789')
+        self.assertEqual(test_data.has_credit_card(), False)
 
     def test_has_at_handle(self):
         test_data = Pii()
