@@ -156,6 +156,10 @@ class DataTestCases(unittest.TestCase):
         test_data = Pii('My credit card number is 1234-56789-23456-789')
         self.assertEqual(test_data.has_credit_card(), False)
 
+        #Test case for invalid credit card with no '-'
+        test_data = Pii('My credit card number is 1234567812345678')
+        self.assertEqual(test_data.has_credit_card(), False)
+
     def test_has_at_handle(self):
         test_data = Pii()
         self.assertEqual(test_data.has_at_handle(), None)
