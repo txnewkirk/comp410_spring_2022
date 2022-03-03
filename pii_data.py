@@ -57,10 +57,18 @@ class Pii(str):
 
 
     def has_name(self):
-        return None
+        # match the user's name
+        match = re.search(r'^[a-zA-Z]{2,}\s[a-zA-Z]', self)
+        if match:
+            return True
+        return False
 
     def has_street_address(self):
-        return None
+        # match the user's address
+        match = re.search(r'^[0-9]{3,4}\s[a-zA-Z]{2,}\s[a-zA-Z]{2,}', self)
+        if match:
+            return True
+        return False
 
     def has_credit_card(self):
         return None

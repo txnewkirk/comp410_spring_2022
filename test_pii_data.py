@@ -128,12 +128,14 @@ class DataTestCases(unittest.TestCase):
 
 
     def test_has_name(self):
-        test_data = Pii()
-        self.assertEqual(test_data.has_name(), None)
+        # test a valid name
+        test_data = Pii('John Doe')
+        self.assertEqual(test_data.has_name(), True)
 
     def test_has_street_address(self):
-        test_data = Pii()
-        self.assertEqual(test_data.has_street_address(), None)
+        # test a valid street address
+        test_data = Pii('1234 Nowhere Street')
+        self.assertEqual(test_data.has_street_address(), True)
 
     def test_has_credit_card(self):
         test_data = Pii()
