@@ -78,7 +78,9 @@ class Pii(str):
         return False
 
     def has_at_handle(self):
-        return None
+        # search "@"
+        return True if re.search(r'+@[\w._%+-]', self) else False
+        
 
     def has_ssn(self):
         return True if re.search(r'\d{3}-\d{2}-\d{4}', self) else False

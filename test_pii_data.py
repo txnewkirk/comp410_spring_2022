@@ -163,8 +163,13 @@ class DataTestCases(unittest.TestCase):
         self.assertEqual(test_data.has_credit_card(), False)
 
     def test_has_at_handle(self):
-        test_data = Pii()
-        self.assertEqual(test_data.has_at_handle(), None)
+        #Test case for @ handle at the start of a word/phrase
+        test_data = Pii('@johndoe')
+        self.assertEqual(test_data.has_at_handle(), True)
+
+        #Test case for @ handle at the end of a word/phrase
+        test_data = Pii('johndoe@')
+        self.assertEqual(test_data.has_at_handle(), False)
 
     def test_has_ssn(self):
         test_data = Pii('123-45-6789')
