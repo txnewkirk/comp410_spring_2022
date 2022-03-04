@@ -128,6 +128,11 @@ class DataTestCases(unittest.TestCase):
         self.assertTrue(test_data.has_ipv4())
         print("\n" + test_data.has_ipv4(True))
 
+        test_data = Pii("Customer Sue Martin contacted the help desk to report "
+                        "an issue with their IPv4 address 192.168.185.88")  # test an address embedded inside sentence
+        self.assertTrue(test_data.has_ipv4())
+        print("\n" + test_data.has_ipv4(True))
+
     def test_has_ipv6(self):
         test_data = Pii('2001:0db8:85a3:0000:0000:8a2e:0370:7334')
         self.assertTrue(test_data.has_ipv6())  # test a valid address
