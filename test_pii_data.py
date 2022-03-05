@@ -57,11 +57,9 @@ class DataTestCases(unittest.TestCase):
         test_data = Pii('johnsmith@gmail.com')
         self.assertTrue(test_data.has_email())
 
-        #test a partial email address
+        # test a partial email address
         test_data = Pii('john@gmail')
         self.assertFalse(test_data.has_email())
-
-
 
     def test_has_ipv4(self):
         # Test a valid address
@@ -126,7 +124,6 @@ class DataTestCases(unittest.TestCase):
         test_data = Pii('$001:0db8:85a3:0000:0000:8a2e:0370:7334')
         self.assertFalse(test_data.has_ipv6())  # invalid character ($) in first set of bytes
 
-
     def test_has_name(self):
         # test a valid name
         test_data = Pii('John Doe')
@@ -138,33 +135,38 @@ class DataTestCases(unittest.TestCase):
         self.assertEqual(test_data.has_street_address(), True)
 
     def test_has_credit_card(self):
-        #Test case for a valid credit card
+        # Test case for a valid credit card
         test_data = Pii('My credit card number is 1234-5678-1234-5678')
         self.assertEqual(test_data.has_credit_card(), True)
 
-        #Test case for a invalid credit card with letter
+        # Test case for a invalid credit card with letter
         test_data = Pii('My credit card number is 12k4-5678-1234-5678')
         self.assertEqual(test_data.has_credit_card(), False)
 
-        #Test case for a invalid credit card with incorrect delimiters
+        # Test case for a invalid credit card with incorrect delimiters
         test_data = Pii('My credit card number is 1234.5678.1234.5678')
         self.assertEqual(test_data.has_credit_card(), False)
 
-        #Test case for a invalid credit card with less numbers
+        # Test case for a invalid credit card with less numbers
         test_data = Pii('My credit card number is 1234-5678-1234-678')
         self.assertEqual(test_data.has_credit_card(), False)
 
-        #Test case for a invalid credit card with too many numbers
+        # Test case for a invalid credit card with too many numbers
         test_data = Pii('My credit card number is 1234-56789-23456-789')
         self.assertEqual(test_data.has_credit_card(), False)
 
-        #Test case for invalid credit card with no '-'
+        # Test case for invalid credit card with no '-'
         test_data = Pii('My credit card number is 1234567812345678')
         self.assertEqual(test_data.has_credit_card(), False)
 
     def test_has_at_handle(self):
-        test_data = Pii()
-        self.assertEqual(test_data.has_at_handle(), None)
+        # Test case for @ handle at the start of a word/phrase
+        test_data = Pii('@johndoe')
+        self.assertEqual(test_data.has_at_handle(), True)
+
+        # Test case for @ handle at the end of a word/phrase
+        test_data = Pii('johndoe@')
+        self.assertEqual(test_data.has_at_handle(), False)
 
     def test_has_ssn(self):
         test_data = Pii('123-45-6789')
@@ -178,8 +180,6 @@ class DataTestCases(unittest.TestCase):
         self.assertFalse(test_data.has_ssn())
         test_data = Pii('123,45,6789')
         self.assertFalse(test_data.has_ssn())
-
-
 
     def test_has_pii(self):
         test_data = Pii()

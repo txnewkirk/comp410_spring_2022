@@ -31,11 +31,9 @@ class Pii(str):
         # 25[0-5]:      match numbers 250 - 255
 
         match = re.search(r'^\b([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b'
-                           r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b'
-                           r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b'
-                           r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b$', self)
-
-
+                          r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b'
+                          r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b'
+                          r'.\b([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\b$', self)
 
         # 255.255.255.255 is already preserved for broadcasting and would be valid
         if self.__eq__('255.255.255.255') | self.__eq__('0.0.0.0'):
@@ -46,15 +44,14 @@ class Pii(str):
 
     def has_ipv6(self):
         match = re.search(r'(^(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?:'
-                           r'(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?:'
-                           r'(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?:'
-                           r'(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?$)', self)
+                          r'(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?:'
+                          r'(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?:'
+                          r'(\b[0-9a-fA-F]{0,4}\b)?:(\b[0-9a-fA-F]{0,4}\b)?$)', self)
         if self.__eq__('0:0:0:0:0:0:0:0') | self.__eq__(':::::::'):
             return False
         if match:
             return True
         return False
-
 
     def has_name(self):
         # match the user's name
@@ -71,14 +68,15 @@ class Pii(str):
         return False
 
     def has_credit_card(self):
-         #match a standard credit card number
+        # match a standard credit card number
         match = re.search(r'\d{4}-\d{4}-\d{4}-\d{4}', self)
         if match:
             return True
         return False
 
     def has_at_handle(self):
-        return None
+        # search "@"
+        return True if re.search(r'(^|\s)@[\w._%+-]+', self) else False
 
     def has_ssn(self):
         return True if re.search(r'\d{3}-\d{2}-\d{4}', self) else False
