@@ -51,7 +51,7 @@ class Pii(str):
             return False
         elif anonymize:
             if count1 == 0 and count2 == 0:
-                return "Invalid address"
+                return self
             return ipv4
         return bool(count2 + count1)
 
