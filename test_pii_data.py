@@ -95,12 +95,12 @@ class DataTestCases(unittest.TestCase):
         self.assertFalse(test_data.has_ipv4())
         # Test anonymize
         self.assertEqual(test_data.has_ipv4(anonymize=True),
-                         '[iPv4 address]')
+                         test_data)
         test_data = Pii('0.0.0.0')  # for default route
         self.assertFalse(test_data.has_ipv4())
         # Test anonymize
         self.assertEqual(test_data.has_ipv4(anonymize=True),
-                         '[iPv4 address]')
+                         test_data)
 
         # Test an out of range address
         test_data = Pii('192.168.168.256')

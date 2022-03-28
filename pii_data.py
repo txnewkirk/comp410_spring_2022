@@ -47,7 +47,7 @@ class Pii(str):
         # 255.255.255.255 is already preserved for broadcasting and would be valid
         if self.__eq__('255.255.255.255') | self.__eq__('0.0.0.0'):
             if anonymize:
-                return ipv4
+                return self
             return False
         elif anonymize:
             if count1 == 0 and count2 == 0:
