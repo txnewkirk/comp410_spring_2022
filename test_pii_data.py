@@ -61,6 +61,12 @@ class DataTestCases(unittest.TestCase):
         test_data = Pii('john@gmail')
         self.assertFalse(test_data.has_email())
 
+    def test_has_email_anoynomize(self):
+        #Anoymize a valid email
+        self.assertEqual(Pii('My email is johnsmith@gmail.com').has_email(anonymize=True), 'My email is [email]')
+
+        #Anoymize an invalid email
+        self.assertEqual(Pii('My email is johnsmithgmail.com').has_email(anonymize=True), 'My email is johnsmithgmail.com')
 
 
     def test_has_ipv4(self):
