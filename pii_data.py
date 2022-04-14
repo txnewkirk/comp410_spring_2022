@@ -16,11 +16,12 @@ class Pii(str):
 
     def has_email(self, anonymize=False):
         # Match a user's email
-        validemail = re.sub(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$', '[email]', self)
+        validemail = re.sub(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+', '[email]', self)
         if anonymize:
             return validemail
         if '[email]' in validemail:
             return True
+        return False
 
 
     def has_ipv4(self):
